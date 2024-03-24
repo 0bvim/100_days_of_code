@@ -21,5 +21,7 @@ vegetables = ["Kale", "Spinach", "Tomatoes"]
 
 dirty_dozen = [fruits, vegetables]
 
+len_list = len(dirty_dozen)
+print(len_list)
 print(dirty_dozen)
 
