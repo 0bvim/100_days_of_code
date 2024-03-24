@@ -13,3 +13,13 @@ states.append("Viniland")
 states.extend(["Steteland", "Lilaland"])
 for i in states:
     print(i)
+
+# New lesson, working with nested lists
+
+fruits = ["Banana", "Apples", "Grapes"]
+vegetables = ["Kale", "Spinach", "Tomatoes"]
+
+dirty_dozen = [fruits, vegetables]
+
+print(dirty_dozen)
+
