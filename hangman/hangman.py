@@ -11,13 +11,24 @@ words = (
     "saudade",
 )
 
-
-def print_blanks(blanks):
-    for i in range(blanks):
-        print("_", end="")
-    print("")
-
-
 word = random.choice(words)
 
-print_blanks(len(word))
+display = []
+
+for _ in range(len(word)):
+    display += "_"
+print(display)
+
+end_of_game = False
+
+while not end_of_game:
+    guess = input("Guess a letter: ").lower()
+    for position in range(len(word)):
+        letter = word[position]
+        if letter == guess:
+            display[position] = letter
+
+    print(display)
+    if "_" not in display:
+        end_of_game = True
+        print("You win!!!")
