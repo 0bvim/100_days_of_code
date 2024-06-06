@@ -7,22 +7,15 @@ direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
 
-def encrypt(text=text, shift=shift):
-    shifted = ""
+def caesar(text, shift, direction):
+    end_text = ""
     for letter in text:
-        shifted += chr((ord(letter) - 97 + shift) % 26 + 97)
-    print(f"Encryped content is {shifted}")
+        if direction == "encode":
+            end_text += chr((ord(letter) - 97 + shift) % 26 + 97)
+        elif direction == "decode":
+            end_text += chr((ord(letter) - 97 - shift) % 26 + 97)
+        else:
+            exit("Invalid input")
+    print(f"Content is {end_text}")
 
-def decrypt(text=text, shift=shift):
-    shifted = ""
-    for letter in text:
-        shifted += chr((ord(letter) - 97 - shift) % 26 + 97)
-    print(f"decrypted content is {shifted}")
-
-if direction == "encode":
-    encrypt(text, shift)
-elif direction == "decode":
-    decrypt(text, shift)
-else:
-    print("Invalid input")
-
+caesar(text=text, direction=direction, shift=shift)
