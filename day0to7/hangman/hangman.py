@@ -58,14 +58,12 @@ stages = ['''
 ''']
 
 words = (
-    "thalia",
-    "estephany",
-    "vinicius",
-    "amor",
-    "familia",
-    "papai",
-    "mamae",
-    "saudade",
+    "thalia", "estephany", "vinicius", "amor", "familia", "papai", "mamae", "saudade",
+    "alice", "bob", "charlie", "david", "eve", "frank", "grace", "hannah", "ivy", "jack",
+    "kathy", "leo", "mona", "nate", "olivia", "paul", "quincy", "rachel", "steve", "tina",
+    "uma", "victor", "wendy", "xander", "yara", "zach", "aiden", "bella", "connor", "diana",
+    "ethan", "fiona", "george", "hazel", "ian", "julia", "kevin", "lily", "mason", "nina",
+    "oscar", "piper", "quinn", "riley", "sophia", "tyler", "ursula", "violet", "wyatt", "xenia"
 )
 
 word = random.choice(words)
