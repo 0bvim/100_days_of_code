@@ -13,6 +13,10 @@ print(programming_dict["Loop"])
 programming_dict["Hello"] = "Hello, how are you today?"
 print(programming_dict["Hello"])
 
+# looping a dictionary
+for thing in programming_dict:
+    print(programming_dict[thing])
+
 # creating new empty dict
 empty_dict = {}
 
@@ -23,3 +27,4 @@ print(programming_dict)
 # editing an existing entry
 programming_dict["Bug"] = "Not more a bug"
 print(programming_dict["Bug"])
+
