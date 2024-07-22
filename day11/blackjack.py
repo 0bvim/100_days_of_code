@@ -30,31 +30,50 @@ def has_black_jack(cards):
 		return True
 	return False
 
+def verify_player_score(cards):
+	return sum(cards) > 21
+
 def verify_initial_score(user, computer):
-	if (has_black_jack(user_cards) and has_black_jack(comp_cards)):
+	if (has_black_jack(user) and has_black_jack(computer)):
 		print ("Draw")
 		exit(0)
-	elif (has_black_jack(comp_cards)):
+	elif (has_black_jack(computer)):
 		print("You lose!")
 		exit(0)
-	elif (has_black_jack(user_cards)):
+	elif (has_black_jack(user)):
 		print("You win!")
 		exit(0)
 
 def print_score(user, computer):
 	print(f"Your score: {sum(user)}\nComputer score: {sum(computer)}")
 
-while (play_game("Do you wanna play blackjack? ")):
+def ace_check(cards):
+	if cards.count(11):
+		return True
 
-	user_cards = []
+def keep_playing(user, computer):
+	if verify_player_score(user):
+		if ace_check(user):
+			user = [1 if x == 11 else x for x in user]
+			print(f"You have Ace of Spades!\nThis is your list {user}")
+
+def start_game():
+	user_cards = [11, 5, 10]
 	comp_cards = []
 
+	# TODO this generate random cards. I'm doing now specific tests
 	for _ in range(2):
-		user_cards.append(deal())
+		# user_cards.append(deal())
 		comp_cards.append(deal())
 	
 	print_score(user_cards, comp_cards)
 	verify_initial_score(user_cards, comp_cards)
-
+	keep_playing(user_cards, comp_cards)
 	# print(f"user {has_black_jack(user_cards)}\ncomp {has_black_jack(comp_cards)}")
 	# print(f"user {sum(user_cards)}\ncomp {sum(comp_cards)}")
+
+def general_game_loop():
+	while (play_game("Do you wanna play blackjack? ")):
+		start_game()
+
+general_game_loop()
