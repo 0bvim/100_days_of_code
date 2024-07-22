@@ -10,6 +10,8 @@ Cards from 2 to 10 have itself value
 Jack, Queen and King count as 10. 
 Ace count 1 or 11 - You decide value,
 if come over or not 21 when you choose value
+
+Flowchart of this class
 https://drive.google.com/uc?export=download&id=1rDkiHCrhaf9eX7u7yjM1qwSuyEk-rPnt
 
 '''
