@@ -1,5 +1,6 @@
 import random
 import os
+from logo import logo
 import platform
 
 '''
@@ -20,96 +21,72 @@ def clear_console():
 
 def play_game(message):
 	answer = input(message).lower()
-
-	if answer == "y" or answer == "yes":
-		return True
-	elif answer == "n" or answer == "no":
-		return False
+	return answer in ["y", "yes"]
 
 def deal():
 	cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 	return random.choice(cards)
 
-def has_black_jack(cards):
-	points = sum(cards)
-	if (points == 21):
-		return True
-	return False
+def has_blackjack(cards):
+	return sum(cards) == 21
 
-def verify_players_score(user, computer):
-	return sum(user) > 21 or sum(computer) > 21
+def adjust_for_ace(cards):
+	while sum(cards) > 21 and 11 in cards:
+		cards[cards.index(11)] = 1
+	return cards
 
-def verify_player_score(cards):
-	return sum(cards) > 21
+def calculate_score(cards):
+	return sum(adjust_for_ace(cards))
 
-def verify_score(user, computer):
-	if (has_black_jack(user) and has_black_jack(computer)):
-		print ("Draw")
-		print_score(user, computer)
-		exit(0)
-	elif (has_black_jack(computer) or verify_player_score(user)):
-		print("You lose!")
-		print_score(user, computer)
-		exit(0)
-	elif (has_black_jack(user) or verify_player_score(computer)):
-		print("You win!")
-		print_score(user, computer)
-		exit(0)
+def game_result(user, computer):
+	if has_blackjack(user) and has_blackjack(computer):
+		return "Draw!"
+	elif has_blackjack(computer):
+		return "You lose! Computer has Blackjack."
+	elif has_blackjack(user):
+		return "You win! You have Blackjack."
+	elif calculate_score(user) > 21:
+		return "You lose! Your score went over 21."
+	elif calculate_score(computer) > 21:
+		return "You win! Computer's score went over 21."
+	elif calculate_score(user) == calculate_score(computer):
+		return "Draw!"
+	elif calculate_score(user) > calculate_score(computer):
+		return "You win!"
 	else:
-		return False
+		return "You lose!"
 
 def print_score(user, computer):
-	print(f"Your score: {sum(user)}\nComputer score: {sum(computer)}")
-
-def ace_check(cards):
-	if cards.count(11):
-		return True
-	return False
-
-def players_ace_cards(user, computer):
-	if verify_players_score(user, computer):
-		if ace_check(user):
-			user = [1 if x == 11 else x for x in user]
-			if ace_check(user):
-				print("You lose!")
-				exit(0)
-		if ace_check(computer):
-			computer = [1 if x == 11 else x for x in computer]
-			if ace_check(computer):
-				print("You win!")
-				exit(0)
-
-def keep_playing(user, computer):
-	while (play_game("Do you want to get another card? ")):
-		if verify_score(user, computer) == False:
-			players_ace_cards(user, computer)
-			verify_score(user, computer)
-			user.append(deal())
-			computer.append(deal())
-			verify_score(user, computer)
-			continue;
-		user.append(deal())
-		computer.append(deal())
-		verify_score(user, computer)
-		print_score(user, computer)
-	computer.append(deal())
-	verify_score(user, computer)
+	print(f"Your cards: {user} - Your score: {sum(user)}\nComputer score: {sum(computer)}")
 
 def start_game():
-	user_cards = []
-	comp_cards = []
-
-	for _ in range(2):
-		user_cards.append(deal())
-		comp_cards.append(deal())
+	user_cards = [deal(), deal()]
+	comp_cards = [deal(), deal()]
 	
 	print_score(user_cards, comp_cards)
-	verify_score(user_cards, comp_cards)
-	keep_playing(user_cards, comp_cards)
+	if not (has_blackjack(user_cards) or has_blackjack(comp_cards)):
+		while play_game("Do you want to get another card? "):
+			user_cards.append(deal())
+			print_score(user_cards, comp_cards)
+			if calculate_score(user_cards) > 21 or has_blackjack(user_cards):
+				break
+	
+	while calculate_score(comp_cards) < 17:
+		comp_cards.append(deal())
+
+	print(game_result(user_cards, comp_cards))
 
 def general_game_loop():
+	clear_console()
+	print(logo)
 	while (play_game("Do you wanna play blackjack? ")):
+		clear_console()
+		print(logo)
 		start_game()
 	print("Bye Bye!")
 
-general_game_loop()
+# ensures that the general game loop function is executed onlywhen the scrpt is run directly
+# not when it's imported as a module in another script
+
+if __name__ == "__main__":
+    general_game_loop()
