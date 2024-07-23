@@ -22,6 +22,12 @@ def qa_fun(message):
 def choose_level():
 	return input("Choose a difficult. Type 'easy' or 'hard' ").lower()
 
+def hint(answer, number):
+	if answer > number:
+		print("Too high")
+	elif answer < number:
+		print("Too low")
+
 guess = False
 
 def game_start():
@@ -45,6 +51,7 @@ def game_start():
 			guess = True
 			logo.big_seq()
 		elif answer not in user_history:
+			hint(answer, number)
 			user_history.append(answer)
 			print ("Guessed: ", end =' ')
 			[print(item, end=' ') for item in user_history]
