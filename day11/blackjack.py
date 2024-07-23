@@ -1,7 +1,7 @@
-import random
-import os
 from logo import logo
 import platform
+import random
+import os
 
 '''
 Blackjack / 21
