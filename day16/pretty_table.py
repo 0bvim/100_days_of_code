@@ -1,6 +1,8 @@
 from prettytable import PrettyTable;
 
-x = PrettyTable() 
-x.add_column("Pokename", ["Xipaku", "Squirtle", "Charmander"])
-x.add_column("Type", ["Eletric", "Water", "Fire Name"])
-print(x)
+table = PrettyTable() 
+table.add_column("Pokename", ["Xipaku", "Squirtle", "Charmander"])
+table.add_column("Type", ["Eletric", "Water", "Fire Name"])
+table.align = "l"
+
+print(table)
