@@ -23,4 +23,3 @@ while is_on:
 		drink = menu.find_drink(choice)
 		if coffe_machine.is_resource_sufficient(drink) and money_machine.make_payment(drink.cost):
 			coffe_machine.make_coffee(drink)
-
