@@ -1,0 +1,3 @@
+import heroes
+
+print(heroes)
