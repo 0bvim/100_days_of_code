@@ -18,8 +18,8 @@ class Paddle(Turtle):
 		self.goto(self.xcor(), new_y)
 
 	def go_down(self):
-		if self.xcor() == (800/2):
+		if self.ycor() == (600/2) * -1:
 			return ;
-		print(self.xcor())
-		new_x = self.xcor() - 20
-		self.goto(new_x, self.ycor())
+		print(self.ycor())
+		new_y = self.ycor() - 20
+		self.goto(self.xcor(), new_y)
