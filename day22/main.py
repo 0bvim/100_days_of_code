@@ -18,6 +18,11 @@ def screen_listen(right_paddle, left_paddle):
 	screen.onkey(left_paddle.go_up, "w")
 	screen.onkey(left_paddle.go_down, "s")
 
+def check_bounce(right, left, ball):
+	if ball.distance(right) < 50 and ball.xcor() > 320 or \
+		ball.distance(left) < 50 and ball.xcor() > -320:
+		ball.bounce_x()
+
 # initialize screen
 screen = screen_init()
 
@@ -37,8 +42,11 @@ while game_is_on:
 	screen.update()
 	ball.move()
 
+	# collision with wall
 	if ball.ycor() > 280 or ball.ycor() < -280:
-		ball.bounce()
-
+		ball.bounce_y()
+	
+	# collision with paddles
+	check_bounce(right_paddle, left_paddle, ball)
 
 screen.exitonclick()
