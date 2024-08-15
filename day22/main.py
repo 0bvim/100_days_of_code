@@ -1,5 +1,7 @@
 from turtle import Screen
 from paddle import Paddle
+from ball import Ball
+import time
 
 def screen_init():
 	screen = Screen()
@@ -19,15 +21,21 @@ def screen_listen(right_paddle, left_paddle):
 # initialize screen
 screen = screen_init()
 
-#put paddles
+# create paddles
 left_paddle = Paddle("left")
 right_paddle = Paddle("right")
+
+# create ball
+ball = Ball()
 
 # listen events
 screen_listen(right_paddle, left_paddle)
 
 game_is_on = True
 while game_is_on:
+	time.sleep(0.1)
 	screen.update()
+	ball.move()
+
 
 screen.exitonclick()
