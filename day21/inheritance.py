@@ -2,7 +2,7 @@ class Animal:
     def __init__(self):
         self.num_eyes = 2
 
-    def breathe(self):
+    def breath(self):
         print("Inhale, exhale")
 
 
@@ -10,7 +10,7 @@ class Fish(Animal):
     def __init__(self):
         super().__init__()
     
-    def breathe(self):
+    def breath(self):
         super().breath()
         print("doing this undewater")
 
@@ -18,5 +18,4 @@ class Fish(Animal):
         print("moving in water.")
 
 nemo = Fish()
-nemo.swim()
 nemo.breath()
