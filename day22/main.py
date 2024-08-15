@@ -1,7 +1,11 @@
 from turtle import Screen
+from table import Table
 from paddle import Paddle
+from scoreboard import Scoreboard
 from ball import Ball
 import time
+
+WIN = 1
 
 def screen_init():
 	screen = Screen()
@@ -23,9 +27,13 @@ def check_bounce(right, left, ball):
 		ball.distance(left) < 50 and ball.xcor() > -320:
 		ball.bounce_x()
 
-def check_missing(ball):
-	if ball.xcor() < -380 or ball.xcor() > 380:
+def check_missing(ball, scoreboard):
+	if ball.xcor() < -380:
 		ball.reset_position()
+		scoreboard.increase_score("left")
+	elif ball.xcor() > 380:
+		ball.reset_position()
+		scoreboard.increase_score("right")
 
 # initialize screen
 screen = screen_init()
@@ -34,15 +42,19 @@ screen = screen_init()
 left_paddle = Paddle("left")
 right_paddle = Paddle("right")
 
-# create ball
+# create ball, scoreboard and table
 ball = Ball()
+scoreboard = Scoreboard()
+table = Table()
+table.drawn_square(800, 600)
 
 # listen events
 screen_listen(right_paddle, left_paddle)
 
 game_is_on = True
 while game_is_on:
-	time.sleep(0.1)
+	table.drawn_square(800, 600)
+	time.sleep(ball.move_speed)
 	screen.update()
 	ball.move()
 
@@ -54,6 +66,6 @@ while game_is_on:
 	check_bounce(right_paddle, left_paddle, ball)
 
 	# detect paddles misses
-	check_missing(ball)
+	check_missing(ball, scoreboard)
 
 screen.exitonclick()
