@@ -23,6 +23,10 @@ def check_bounce(right, left, ball):
 		ball.distance(left) < 50 and ball.xcor() > -320:
 		ball.bounce_x()
 
+def check_missing(ball):
+	if ball.xcor() < -380 or ball.xcor() > 380:
+		ball.reset_position()
+
 # initialize screen
 screen = screen_init()
 
@@ -48,5 +52,8 @@ while game_is_on:
 	
 	# collision with paddles
 	check_bounce(right_paddle, left_paddle, ball)
+
+	# detect paddles misses
+	check_missing(ball)
 
 screen.exitonclick()
