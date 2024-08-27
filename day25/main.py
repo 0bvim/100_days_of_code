@@ -15,4 +15,5 @@
 import pandas
 
 data = pandas.read_csv("weather_data.csv")
-print(data["temp"])
+print(type(data)) # dataframe
+print(data["temp"]) # series (single column)
