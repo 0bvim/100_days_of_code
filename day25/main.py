@@ -14,7 +14,13 @@
 
 import pandas
 
-data = pandas.read_csv("weather_data.csv")
+# data = pandas.read_csv("weather_data.csv")
+data = pandas.read_csv("arquivo.csv")
+quantidade_de_estados = data['Estado'].value_counts()
+total_sp = quantidade_de_estados['SP']
+
+print(f"Total de SP = {total_sp} e total registros {len(data)}")
+
 # print(type(data)) # dataframe
 # print(data["temp"]) # series (single column)
 
@@ -27,18 +33,18 @@ data = pandas.read_csv("weather_data.csv")
 # print(data["temp"].max())
 
 # get data in columns
-print(data[data.day == "Monday"])
-print(data[data.temp == data.temp.max()])
+# print(data[data.day == "Monday"])
+# print(data[data.temp == data.temp.max()])
 
 # create a brand new data frame
 
 data_ditc = {
-        "students": ["Stete", "Lila", "Nivi"],
-        "scores": [100, 101, 100]
+	"students": ["Stete", "Lila", "Nivi"],
+	"scores": [100, 101, 100]
 }
 
 new_frame = pandas.DataFrame(data_ditc)
-print(new_frame)
+# print(new_frame)
 
 # convert to CSV file
 
